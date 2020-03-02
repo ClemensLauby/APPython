@@ -41,6 +41,20 @@ def LineareRegression(x,y):
     #db gibt die standardunsicherheit der konstante b_0 an.
     return a_0 , b_0 , da , db
 
+
+def GewichteterMittelwert(liste,fehler):
+    delta = [1/fehler[i]**2 for i in range(len(fehler))]
+    return sum(delta *liste)/sum(delta)
+
+
+
+
+
+def Mittelwertfehler(fehler):
+    fehler2 = [1/fehler[i]**2 for i in range(len(fehler))]
+    delta = math.sqrt(sum(fehler2))
+    return 1/delta
+
 def GewichteteRegression(x,y,dx):
     #Eine gewichteste Regression macht dann sinn, wenn die messerte unterschiedliche ungenauigkeiten haben.
 
