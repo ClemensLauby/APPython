@@ -151,7 +151,7 @@ def runden(zahl, stellen=1):
     soll [int]
     :return: gerundete zahl [float]
     """
-    logzahl = np.log10(zahl)
+    logzahl = np.log10(abs(zahl))
     if logzahl >= 0:
         aufgerundet = math.floor(logzahl) - stellen + 1
         zahl = np.round(zahl, (-1)*aufgerundet)
@@ -186,7 +186,7 @@ def anpassen(zahl, ungenauigkeit, stellen=1):
     :param stellen: anzahl der signifikanten stellen der 2. Zahl [int]
     :return: angepasste zahl [float]
     """
-    logzahl = np.log10(ungenauigkeit)
+    logzahl = np.log10(abs(ungenauigkeit))
     if logzahl >= 0:
         aufgerundet = math.floor(logzahl) - stellen + 1
         zahl = np.round(zahl, (-1) * aufgerundet)
@@ -212,7 +212,6 @@ def listeanpassen(liste, ungenauigkeit, stellen=1):
         :return: eine Liste mit den angepassten werten [list]
         """
     for i, j in enumerate(liste):
-        print(j)
         liste[i] = anpassen(j, ungenauigkeit[i], stellen)
     return liste
 
