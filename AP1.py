@@ -216,7 +216,7 @@ def listeanpassen(liste, ungenauigkeit, stellen=1):
     return liste
 
 
-def tabelle(listen, spaltenname=None):
+def tabelle(listen, spaltenname=None, spaltweite=12):
     """
     gibt den latex code einer tabelle aus, welche die in listen
     (listen muss liste aus listen sein) angegebenen listen (alle listen
@@ -229,6 +229,8 @@ def tabelle(listen, spaltenname=None):
     :param spaltenname: Liste mit strings. Strings werden als
      spaltenueberschrift
     verwendet (muss gleiche laenge wie listen haben
+    :param spaltweite: Weite der der spalten in latex code
+    (gut um uebersichtlichkeit zu bewahren) [int]
     :return:
     """
     print('\\toprule')
@@ -238,9 +240,10 @@ def tabelle(listen, spaltenname=None):
         ausgabe = ''
         for i in range(len(spaltenname)):
             if i == len(listen)-1:
-                ausgabe += str(spaltenname[i]) + '  \\\\'
+                ausgabe += "{:^{}}".format(spaltenname[i], spaltweite)\
+                           + '  \\\\'
             else:
-                ausgabe += str(spaltenname[i]) + ' & '
+                ausgabe += "{:^{}}".format(spaltenname[i], spaltweite) + ' & '
         print(ausgabe)
         print('\midrule')
 
@@ -248,8 +251,8 @@ def tabelle(listen, spaltenname=None):
         ausgabe = ''
         for i in range(len(listen)):
             if i == len(listen)-1:
-                ausgabe += str(listen[i][j]) + '  \\\\'
+                ausgabe += "{:<{}}".format(listen[i][j], spaltweite) + '  \\\\'
             else:
-                ausgabe += str(listen[i][j]) + ' & '
+                ausgabe += "{:<{}}".format(listen[i][j], spaltweite) + ' & '
         print(ausgabe)
     print('\\bottomrule')
